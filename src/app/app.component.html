@@ -1,5 +1,30 @@
 <h1>ng-conf 2018 calendar</h1>
 
-<h2>Calendar for <a target="_blank" href="https://www.ng-conf.org/">ng-conf 2018</a></h2>
-
-<app-schedule></app-schedule>
+<div class="row">
+  <div class="col-md-4">
+    <h3>Calendar for <a target="_blank" href="https://www.ng-conf.org/">ng-conf 2018</a></h3>
+  </div>
+  <div class="col-md-4">
+    {{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group">
+      <button class="btn btn-primary"
+              (click)="view = 'month'"
+              [class.active]="view === 'month'">
+        Month
+      </button>
+      <button class="btn btn-primary"
+              (click)="view = 'week'"
+              [class.active]="view === 'week'">
+        Week
+      </button>
+      <button class="btn btn-primary"
+              (click)="view = 'day'"
+              [class.active]="view === 'day'">
+        Day
+      </button>
+    </div>
+  </div>
+</div>
+<app-schedule [view]="view" [viewDate]="viewDate"></app-schedule>

@@ -1,4 +1,4 @@
-export class Event {
+export class NgEvent {
   post_title: string;
   post_excerpt: string;
   url: string;
@@ -9,12 +9,12 @@ export class Event {
   date: string;
   location: string;
   color: string;
-  tracks: Track[];
+  tracks: NgTrack[];
   speakers: any[];
   thumbnail: boolean;
 }
 
-export class Track {
+export class NgTrack {
   term_id: number;
   name: string;
   slug: string;

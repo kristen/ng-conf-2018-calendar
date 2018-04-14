@@ -1,20 +1,32 @@
 <h1>ng-conf 2018 calendar</h1>
 
-<button class="btn btn-primary"
-        (click)="setViewDay(18)"
-        [class.active]="view === 'month'">
-  Wed
-</button>
-<button class="btn btn-primary"
-        (click)="setViewDay(19)"
-        [class.active]="view === 'week'">
-  Thurs
-</button>
-<button class="btn btn-primary"
-        (click)="setViewDay(20)"
-        [class.active]="view === 'day'">
-  Fri
-</button>
+<div class="btn-group" *ngIf="view === 'day'">
+  <button class="btn btn-primary"
+          (click)="setViewDay(16)"
+          [class.active]="viewDate.getDate() === 16">
+    Mon
+  </button>
+  <button class="btn btn-primary"
+          (click)="setViewDay(17)"
+          [class.active]="viewDate.getDate() === 17">
+    Tues
+  </button>
+  <button class="btn btn-primary"
+          (click)="setViewDay(18)"
+          [class.active]="viewDate.getDate() === 18">
+    Wed
+  </button>
+  <button class="btn btn-primary"
+          (click)="setViewDay(19)"
+          [class.active]="viewDate.getDate() === 19">
+    Thurs
+  </button>
+  <button class="btn btn-primary"
+          (click)="setViewDay(20)"
+          [class.active]="viewDate.getDate() === 20">
+    Fri
+  </button>
+</div>
 
 <div class="row">
   <div class="col-md-4">

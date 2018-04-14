@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  view = 'week';
+  view = 'day';
   viewDate: Date = new Date(2018, 3, 18);
 
   setViewDay(day) {

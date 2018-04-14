@@ -1,5 +1,21 @@
 <h1>ng-conf 2018 calendar</h1>
 
+<button class="btn btn-primary"
+        (click)="setViewDay(18)"
+        [class.active]="view === 'month'">
+  Wed
+</button>
+<button class="btn btn-primary"
+        (click)="setViewDay(19)"
+        [class.active]="view === 'week'">
+  Thurs
+</button>
+<button class="btn btn-primary"
+        (click)="setViewDay(20)"
+        [class.active]="view === 'day'">
+  Fri
+</button>
+
 <div class="row">
   <div class="col-md-4">
     <h3>Calendar for <a target="_blank" href="https://www.ng-conf.org/">ng-conf 2018</a></h3>

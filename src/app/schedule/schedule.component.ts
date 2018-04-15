@@ -1,17 +1,24 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ScheduleService } from './schedule.service';
-import { CalendarEvent } from 'angular-calendar';
+import { CalendarEvent, CalendarEventTitleFormatter } from 'angular-calendar';
 import {
   isSameDay,
   isSameMonth
 } from 'date-fns';
 import { NgEvent } from '../event.model';
 import { CalendarMonthViewDay } from 'angular-calendar';
+import { CustomEventTitleFormatter } from './custom-event-title-formatter.provider';
 
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.css']
+  styleUrls: ['./schedule.component.css'],
+  providers: [
+    {
+      provide: CalendarEventTitleFormatter,
+      useClass: CustomEventTitleFormatter
+    }
+  ]
 })
 export class ScheduleComponent implements OnInit {
   @Input() view: string;

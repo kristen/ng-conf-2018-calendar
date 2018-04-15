@@ -21,86 +21,70 @@ const httpOptions = {
 
 const colors: {[color: string]: EventColor} = {
   "Murano": {
-    secondary: '#ad2121',
-    primary: '#FAE3E3'
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
   },
   "Venezia": {
-    secondary: '#1e90ff',
-    primary: '#D1E8FF'
+    primary: '#1e90ff',
+    secondary: '#D1E8FF'
   },
   "3rd Floor": {
-    secondary: '#e3bc08',
-    primary: '#FDF1BA'
+    primary: '#e3bc08',
+    secondary: '#FDF1BA'
   },
   "Grand Ballroom": {
+    primary: '#934b33',
     secondary: '#ac725e',
-    primary: '#1d1d1d',
   },
   "Gateway": {
+    primary: '#7a45c9',
     secondary: '#a47ae2',
-    primary: '#1d1d1d',
   },
   "Grand America Hotel 1st &amp; 3rd Floor": {
-    secondary: '#f83a22',
-    primary: '#1d1d1d',
+    primary: '#f83a22',
+    secondary: '#df5c4b',
   },
   "Grand Ballroom A/D": {
-    secondary: '#ffad46',
-    primary: '#1d1d1d',
+    primary: '#ffad46',
+    secondary: '#d9be9d',
   },
   "Grand Ballroom B": {
-    secondary: '#16a765',
-    primary: '#1d1d1d',
+    primary: '#16a765',
+    secondary: '#99b8ad',
   },
   "Grand Ballroom C": {
-    secondary: '#7bd148',
-    primary: '#1d1d1d',
+    primary: '#7bd148',
+    secondary: '#bdd1b3',
   },
   "Imperial Ballroom": {
+    primary: '#a4505c',
     secondary: '#cabdbf',
-    primary: '#1d1d1d',
   },
   "Imperial Ballroom C": {
-    secondary: '#d06b64',
-    primary: '#1d1d1d',
+    primary: '#d06b64',
+    secondary: '#dbbeba',
   },
   "Imperial Ballroom D": {
-    secondary: '#42d692',
-    primary: '#1d1d1d',
+    primary: '#42d692',
+    secondary: '#bcdbd0',
   },
   "Imperial Reception B/C": {
-    secondary: '#fbe983',
-    primary: '#1d1d1d',
+    primary: '#fbe983',
+    secondary: '#fffad6',
   },
   "Imperial Ballroom A": {
-    secondary: '#9a9cff',
-    primary: '#1d1d1d',
+    primary: '#9a9cff',
+    secondary: '#e6e5ff',
   },
   "Savoy": {
-    secondary: '#92e1c0',
-    primary: '#1d1d1d',
+    primary: '#92e1c0',
+    secondary: '#d5ede5',
   },
   "": {
-    secondary: "#ffffff",
-    primary: "#000000"
+    primary: "#2356ff",
+    secondary: "#8094d9"
   }
 };
-
-const LOCATIONS = [
-  "Murano",
-  "Venezia",
-  "3rd Floor",
-  "Grand Ballroom",
-  "Gateway",
-  "Grand America Hotel 1st &amp; 3rd Floor",
-  "Grand Ballroom A/D",
-  "Grand Ballroom B",
-  "Grand Ballroom C",
-  "Imperial Ballroom",
-  "Imperial Ballroom C",
-  "Imperial Reception B/C",
-  "Imperial Ballroom A",
-  "Savoy"];
 
 @Injectable()
 export class ScheduleService {
@@ -126,9 +110,6 @@ export class ScheduleService {
     const start = new Date(Date.parse(`${event.date}, 2018 ${event.time}`));
     const end = new Date(Date.parse(`${event.date}, 2018 ${event.end_time}`));
     const color = colors[event.location];
-    if (!color) {
-      console.log("color: ", event);
-    }
     return {
       start,
       end,

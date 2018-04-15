@@ -38,4 +38,11 @@ export class ScheduleComponent implements OnInit {
       }
     }
   }
+
+  eventClicked(event: CalendarEvent<NgEvent>): void {
+    window.open(
+      event.meta.url,
+      '_blank'
+    );
+  }
 }

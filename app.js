@@ -18,19 +18,17 @@ const options = {
   body: dataString,
 };
 
-const server = http.createServer((req, res) => {
-  console.log(req);
+const app = http.createServer((req, res) => {
   res.writeHead(200, headers);
   request(options, function callback(error, response, body) {
     if (!error && response.statusCode === 200) {
-      console.log(body);
       res.write(body);
       res.end();
     }
   });
 });
 
-server.listen(port, hostname, () => {
+app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
 

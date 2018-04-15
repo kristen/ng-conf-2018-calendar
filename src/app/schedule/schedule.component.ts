@@ -6,6 +6,7 @@ import {
   isSameMonth
 } from 'date-fns';
 import { NgEvent } from '../event.model';
+import { CalendarMonthViewDay } from 'angular-calendar';
 
 @Component({
   selector: 'app-schedule',
@@ -46,5 +47,16 @@ export class ScheduleComponent implements OnInit {
       event.meta.url,
       '_blank'
     );
+  }
+
+  beforeMonthViewRender({ body }: { body: CalendarMonthViewDay[] }): void {
+    body.forEach(cell => {
+      const groups: any = {};
+      cell.events.forEach((event: CalendarEvent<NgEvent>) => {
+        groups[event.meta.location] = groups[event.meta.location] || [];
+        groups[event.meta.location].push(event);
+      });
+      cell['eventGroups'] = Object.entries(groups);
+    });
   }
 }

@@ -20,19 +20,87 @@ const httpOptions = {
 };
 
 const colors: {[color: string]: EventColor} = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3'
+  "Murano": {
+    secondary: '#ad2121',
+    primary: '#FAE3E3'
   },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF'
+  "Venezia": {
+    secondary: '#1e90ff',
+    primary: '#D1E8FF'
   },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA'
+  "3rd Floor": {
+    secondary: '#e3bc08',
+    primary: '#FDF1BA'
+  },
+  "Grand Ballroom": {
+    secondary: '#ac725e',
+    primary: '#1d1d1d',
+  },
+  "Gateway": {
+    secondary: '#a47ae2',
+    primary: '#1d1d1d',
+  },
+  "Grand America Hotel 1st &amp; 3rd Floor": {
+    secondary: '#f83a22',
+    primary: '#1d1d1d',
+  },
+  "Grand Ballroom A/D": {
+    secondary: '#ffad46',
+    primary: '#1d1d1d',
+  },
+  "Grand Ballroom B": {
+    secondary: '#16a765',
+    primary: '#1d1d1d',
+  },
+  "Grand Ballroom C": {
+    secondary: '#7bd148',
+    primary: '#1d1d1d',
+  },
+  "Imperial Ballroom": {
+    secondary: '#cabdbf',
+    primary: '#1d1d1d',
+  },
+  "Imperial Ballroom C": {
+    secondary: '#d06b64',
+    primary: '#1d1d1d',
+  },
+  "Imperial Ballroom D": {
+    secondary: '#42d692',
+    primary: '#1d1d1d',
+  },
+  "Imperial Reception B/C": {
+    secondary: '#fbe983',
+    primary: '#1d1d1d',
+  },
+  "Imperial Ballroom A": {
+    secondary: '#9a9cff',
+    primary: '#1d1d1d',
+  },
+  "Savoy": {
+    secondary: '#92e1c0',
+    primary: '#1d1d1d',
+  },
+  "": {
+    secondary: "#ffffff",
+    primary: "#000000"
   }
 };
+
+const LOCATIONS = [
+  "Murano",
+  "Venezia",
+  "3rd Floor",
+  "Grand Ballroom",
+  "Gateway",
+  "Grand America Hotel 1st &amp; 3rd Floor",
+  "Grand Ballroom A/D",
+  "Grand Ballroom B",
+  "Grand Ballroom C",
+  "Imperial Ballroom",
+  "Imperial Ballroom C",
+  "Imperial Reception B/C",
+  "Imperial Ballroom A",
+  "Savoy"];
 
 @Injectable()
 export class ScheduleService {
@@ -57,11 +125,15 @@ export class ScheduleService {
   private ngEventToCalendarEvent(event: NgEvent): CalendarEvent<NgEvent> {
     const start = new Date(Date.parse(`${event.date}, 2018 ${event.time}`));
     const end = new Date(Date.parse(`${event.date}, 2018 ${event.end_time}`));
+    const color = colors[event.location];
+    if (!color) {
+      console.log("color: ", event);
+    }
     return {
       start,
       end,
       title: event.post_title,
-      color: colors.red,
+      color: color,
       meta: event,
     } as CalendarEvent;
   }

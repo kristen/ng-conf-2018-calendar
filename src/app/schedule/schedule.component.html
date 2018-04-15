@@ -20,7 +20,7 @@
       view="day"
       (mwlClick)="eventClicked.emit()">
     </mwl-calendar-event-title>
-    <div class="location">{{dayEvent.event.meta.location}}</div>
+    <div class="location" [innerHtml]="dayEvent.event.meta.location"></div>
   </div>
 </ng-template>
 

@@ -1,0 +1,9 @@
+:host >>> .cal-day-view .cal-event {
+  white-space: normal;
+}
+:host >>> .cal-day-view .cal-event .cal-event-title {
+  white-space: nowrap;
+}
+.location {
+  font-weight: bold;
+}

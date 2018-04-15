@@ -17,6 +17,8 @@ export class ScheduleComponent implements OnInit {
   @Input() viewDate: Date;
   activeDayIsOpen = true;
   events: CalendarEvent<NgEvent>[] = [];
+// exclude weekends
+  excludeDays: number[] = [0, 6];
 
   constructor(private scheduleService: ScheduleService) { }
 

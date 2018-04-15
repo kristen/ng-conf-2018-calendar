@@ -1,3 +1,29 @@
+<ng-template
+  #customDayTemplate
+  let-dayEvent="dayEvent"
+  let-tooltipPlacement="tooltipPlacement"
+  let-eventClicked="eventClicked"
+  let-tooltipTemplate="customTooltip"
+  let-tooltipAppendToBody="tooltipAppendToBody">
+  <div
+    class="cal-event"
+    [style.backgroundColor]="dayEvent.event.color.secondary"
+    [style.borderColor]="dayEvent.event.color.primary"
+    [mwlCalendarTooltip]="dayEvent.event.title | calendarEventTitle:'dayTooltip':dayEvent.event"
+    [tooltipPlacement]="tooltipPlacement"
+    [tooltipEvent]="dayEvent.event"
+    [tooltipTemplate]="tooltipTemplate"
+    [tooltipAppendToBody]="tooltipAppendToBody">
+    <mwl-calendar-event-actions [event]="dayEvent.event"></mwl-calendar-event-actions>
+    <mwl-calendar-event-title
+      [event]="dayEvent.event"
+      view="day"
+      (mwlClick)="eventClicked.emit()">
+    </mwl-calendar-event-title>
+    <div class="location">{{dayEvent.event.meta.location}}</div>
+  </div>
+</ng-template>
+
 <div *ngIf="events.length">
   <div [ngSwitch]="view">
     <mwl-calendar-month-view
@@ -5,12 +31,14 @@
       [viewDate]="viewDate"
       [events]="events"
       [activeDayIsOpen]="activeDayIsOpen"
+      [excludeDays]="excludeDays"
       (dayClicked)="dayClicked($event.day)"
       (eventClicked)="eventClicked($event.event)">
     </mwl-calendar-month-view>
     <mwl-calendar-week-view
       *ngSwitchCase="'week'"
       [viewDate]="viewDate"
+      [excludeDays]="excludeDays"
       (eventClicked)="eventClicked($event.event)"
       [events]="events">
     </mwl-calendar-week-view>
@@ -19,7 +47,9 @@
       [viewDate]="viewDate"
       [dayStartHour]="7"
       [dayEndHour]="21"
+      [hourSegments]="6"
       (eventClicked)="eventClicked($event.event)"
+      [eventTemplate]="customDayTemplate"
       [events]="events">
     </mwl-calendar-day-view>
   </div>

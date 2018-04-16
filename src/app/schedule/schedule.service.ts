@@ -88,7 +88,7 @@ const colors: {[color: string]: EventColor} = {
 
 @Injectable()
 export class ScheduleService {
-  private baseUrl = 'http://localhost:8080/api';
+  private baseUrl = '/api';
 
   constructor(private http: HttpClient) { }
 

@@ -88,6 +88,7 @@ const colors: {[color: string]: EventColor} = {
 
 @Injectable()
 export class ScheduleService {
+  private baseUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) { }
 
@@ -99,9 +100,7 @@ export class ScheduleService {
   }
 
   private getSchedule(): Observable<Response> {
-    const url = 'http://localhost:3000';
-    const params = {};
-    return this.http.post<Response>(url, params, httpOptions).pipe(
+    return this.http.get<Response>(this.baseUrl + '/sessions', httpOptions).pipe(
       tap(r => console.log(r)),
     );
   }

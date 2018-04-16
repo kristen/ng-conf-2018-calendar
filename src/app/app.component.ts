@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   view = 'day';
-  viewDate: Date = new Date(2018, 3, 19);
+  viewDate: Date = new Date();
 
   setViewDay(day) {
     this.viewDate = new Date(this.viewDate.setDate(day));

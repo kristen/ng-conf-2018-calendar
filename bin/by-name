@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Exit if any subcommand fails
+set -e
+
+YELLOW='\033[0;33m'
+NO_COLOR='\033[0m'
+
+if ! command -v jq > /dev/null; then
+  printf "please run ${YELLOW}brew install jq${NO_COLOR} and try again\n" >& 2
+  exit 1
+elif ! command -v fzf > /dev/null; then
+  printf "please run ${YELLOW}brew install fzf${NO_COLOR} and try again\n" >& 2
+  exit 1
+fi
+
+# exit gracefully when given a control-c interrupt
+trap ctrl_c INT
+
+function ctrl_c() {
+  printf "\n"
+  echo "Goodbye! 👋"
+  exit 0
+}
+
+find_an_event () {
+  SCHEDULE_ENTRY=$(jq '.sessions[] .post_title' < $(dirname $0)/data/schedule.json | tr -d \" | fzf)
+
+  ENTRY_JSON=$(jq ".sessions[] | select(.post_title==\"${SCHEDULE_ENTRY}\")" < $(dirname $0)/data/schedule.json)
+
+  TITLE=$(echo $ENTRY_JSON | jq ".post_title" | tr -d "\"\n")
+  DATE=$(echo $ENTRY_JSON | jq ".date" | tr -d "\"\n")
+  START_TIME=$(echo $ENTRY_JSON | jq ".time" | tr -d "\"\n")
+  LOCATION=$(echo $ENTRY_JSON | jq ".location" | tr -d "\"\n")
+
+  printf "\n\n"
+  printf "${TITLE}\n"
+  printf "${YELLOW}${START_TIME}${NO_COLOR}, ${DATE}\n"
+  printf "${LOCATION}\n\n"
+
+  read -p "Press any key to continue or control-c to quit" -n1 -s
+}
+
+while true; do
+  find_an_event
+done

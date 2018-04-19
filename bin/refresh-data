@@ -1,0 +1,8 @@
+#!/bin/bash
+
+node $(dirname $0)/../app.js > /dev/null &
+sleep 1
+
+curl localhost:3000 > $(dirname $0)/data/schedule.json
+
+kill %1

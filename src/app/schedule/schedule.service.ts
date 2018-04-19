@@ -80,9 +80,17 @@ const colors: {[color: string]: EventColor} = {
     primary: '#92e1c0',
     secondary: '#d5ede5',
   },
+  "Riviera": {
+    primary: '#4286f4',
+    secondary: '#ccdffc',
+  },
+  "default": {
+    primary: '#f97b20',
+    secondary: '#ffd2b2',
+  },
   "": {
-    primary: "#2356ff",
-    secondary: "#8094d9"
+    primary: '#2356ff',
+    secondary: '#8094d9',
   }
 };
 
@@ -100,15 +108,20 @@ export class ScheduleService {
   }
 
   private getSchedule(): Observable<Response> {
-    return this.http.get<Response>(this.baseUrl + '/sessions', httpOptions).pipe(
-      tap(r => console.log(r)),
-    );
+    return this.http.get<Response>(this.baseUrl + '/sessions', httpOptions);
   }
 
   private ngEventToCalendarEvent(event: NgEvent): CalendarEvent<NgEvent> {
     const start = new Date(Date.parse(`${event.date}, 2018 ${event.time}`));
     const end = new Date(Date.parse(`${event.date}, 2018 ${event.end_time}`));
-    const color = colors[event.location];
+    const color = (() => {
+      if (!colors[event.location]) {
+        console.warn("event missing color, using default", event);
+        return colors["default"];
+      } else {
+        return colors[event.location];
+      }
+    })();
     return {
       start,
       end,
